@@ -1,3 +1,23 @@
+BEFORE:
+mongoimport --db test --collection grades --drop --file grades.json
+
+use admin
+db.createUser(
+{
+    user: "root",
+    pwd: "password",
+    roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"],
+})
+
+use test
+db.createUser(
+  {
+    user: "test",
+    pwd: "test123",
+    roles: [ { role: "readWrite", db: "test" }]
+  }
+)
+
 **TASKS:**
 1. INSERT COLLECTION
 https://www.mkyong.com/mongodb/java-mongodb-insert-a-document/

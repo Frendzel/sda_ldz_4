@@ -11,11 +11,11 @@ import static java.lang.Integer.valueOf;
 
 public class PropertiesLoader {
 
-    final static Logger logger = Logger.getLogger(PropertiesLoader.class);
-    public static String PATH = "connection.properties";
-    Properties prop = new Properties();
+    private final static Logger logger = Logger.getLogger(PropertiesLoader.class);
+    private Properties prop = new Properties();
 
     public void init() throws IOException {
+        final String PATH = "connection.properties";
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PATH);
 
         if (inputStream != null) {
