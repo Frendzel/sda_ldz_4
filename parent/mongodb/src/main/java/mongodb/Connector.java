@@ -1,6 +1,7 @@
 package mongodb;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.AggregateIterable;
@@ -63,7 +64,7 @@ public class Connector implements ConnectorApi {
 
     private MongoCollection<Document> toMongoCollection(String collectionName) {
         MongoDatabase connect = connect();
-        return connect.getCollection(collectionName);
+        return connect.getCollection(collectionName, Document.class);
     }
 
 }

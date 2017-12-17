@@ -7,12 +7,7 @@ mongoimport --db test --collection grades --drop --file grades.json
 Creating admin user
 ```
 use admin
-db.createUser(
-{
-    user: "root",
-    pwd: "password",
-    roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"],
-})
+db.createUser({user: "root",pwd: "password",roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"],})
 ```
 Creating test user
 ```
