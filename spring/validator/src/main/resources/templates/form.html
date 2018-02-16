@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form action="#" th:action="@{/}" method="post" th:object="${car}">
+    <table>
+        <tr>
+            <td>OWNER:</td>
+            <td>
+                <input type="text" th:field="*{owner}"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('owner')}"
+                   th:errors="*{owner}">Incorrect date</p>
+            </td>
+        </tr>
+        <tr>
+            <td>DOOR NUMBER:</td>
+            <td>
+                <input type="number" th:field="*{doorNumber}"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('doorNumber')}"
+                   th:errors="*{doorNumber}">Incorrect date</p>
+            </td>
+        </tr>
+        <tr>
+            <td>COLOR:</td>
+            <td>
+                <input type="text" th:field="*{color}"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('color')}"
+                   th:errors="*{color}">Incorrect date</p>
+            </td>
+        </tr>
+        <tr>
+            <td>TYPE:</td>
+            <td>
+                <input type="text" th:field="*{type}"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('type')}"
+                   th:errors="*{type}">Incorrect date</p>
+            </td>
+        </tr>
+        <tr>
+            <td>BRAND:</td>
+            <td>
+                <input type="text" th:field="*{brand}"/>
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('brand')}"
+                   th:errors="*{brand}">Incorrect date</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">SUBMIT</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
