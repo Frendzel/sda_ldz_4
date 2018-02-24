@@ -25,6 +25,9 @@ public class App implements CommandLineRunner {
     @Autowired
     ChuckNorrisJokesCollector chuckNorrisJokesCollector;
 
+    @Autowired
+    UserService userService;
+
     public static void main(String[] args) {
         SpringApplication.run(App.class);
     }
@@ -43,32 +46,26 @@ public class App implements CommandLineRunner {
             System.out.print(rs.getString(5) + "\n");
         });
 
-        selectUser(5);
-        try {
-            toMale(5);
-        } catch (Exception e) {
+        chuckNorrisJokesCollector.getRandomJoke();
+
+        //let's test transactions here:
+//        userService.transform();
+
+        try{
+            userService.wrongInsert();
+        } catch(Exception e){
             System.out.println(e);
         }
-        selectUser(5);
+        userService.selectUser(1000);
+        userService.selectUser(1001);
 
-        chuckNorrisJokesCollector.getRandomJoke();
-    }
-
-
-    @Transactional
-    public void toMale(int id) {
-        jdbcTemplate.update("UPDATE USER SET first_name = 'test' WHERE id = ?", id);
-        jdbcTemplate.update("UPDATE USER SET gender = 'MaleMaleMale' WHERE id = ?", id);
-        throw new RuntimeException("Nie moge tego zrobic");
-    }
-
-    private void selectUser(int id) {
-        jdbcTemplate.query("SELECT * FROM USER WHERE id = ?",
-                new Object[]{id},
-                rs -> {
-                    System.out.println("Twoja plec to: " + rs.getString("gender"));
-                    System.out.println("Twoje imie to: " + rs.getString("first_name"));
-                });
+        try{
+            userService.selectUser(5);
+            userService.toMale(5);
+        } catch (Exception e){
+            System.out.println(e);
+            userService.selectUser(5);
+        }
     }
 
     public void csvRecords() throws IOException {

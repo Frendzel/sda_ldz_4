@@ -12,6 +12,6 @@ public class App {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         ctx.start();
         System.out.println(Arrays.toString(ctx.getBeanDefinitionNames()));
-        ctx.close();
+//        ctx.close();
     }
 }

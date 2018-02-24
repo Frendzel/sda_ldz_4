@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -18,9 +19,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Async
+//    @Async
     @RequestMapping(path = "add", method = RequestMethod.POST)
-    public Future<User> addUser(@RequestBody User user) throws InterruptedException {
+    public Future<User> addUser(@Valid @RequestBody User user) throws InterruptedException {
 //        Thread.sleep(10000);
         return AsyncResult.forValue(userService.createUser(user));
     }

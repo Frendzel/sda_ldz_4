@@ -7,4 +7,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <aop:aspectj-autoproxy/>
+
+    <bean name="loggableAspect" class="pl.erbel.PleaseLogMeAspect"/>
+    <bean name="testComponent" class="pl.erbel.TestComponent" init-method="pleaseTestMyAspect"/>
+
 </beans>
