@@ -32,7 +32,6 @@
         <module>async</module>
         <module>spring-boot</module>
         <module>transactions</module>
-        <module>neo4j</module>
         <module>rest-service</module>
         <module>jms</module>
         <module>file-uploader</module>

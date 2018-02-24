@@ -21,5 +21,14 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>1.5.8.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- DODAC BOOTSTRAPA -->
+        <!-- DODAC JQUERY -->
+        <!--https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-->
+        <!-- DODAC devtools -->
+        <!-- DODAC spring-boot-starter-test -->
     </dependencies>
 </project>
