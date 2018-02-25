@@ -24,11 +24,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.8.RELEASE</version>
         </dependency>
         <!-- DODAC BOOTSTRAPA -->
         <!-- DODAC JQUERY -->
         <!--https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-->
         <!-- DODAC devtools -->
         <!-- DODAC spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>1.13.8.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>
