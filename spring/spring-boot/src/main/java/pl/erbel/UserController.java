@@ -2,13 +2,11 @@ package pl.erbel;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.concurrent.Future;
+
 
 @RestController
 public class UserController {
@@ -19,11 +17,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    @Async
+    /**
+     * Method will be used to create validated user
+     */
     @RequestMapping(path = "add", method = RequestMethod.POST)
-    public Future<User> addUser(@Valid @RequestBody User user) throws InterruptedException {
-//        Thread.sleep(10000);
-        return AsyncResult.forValue(userService.createUser(user));
+    public User addUser(@Valid @RequestBody User user) throws InterruptedException {
+        return userService.createUser(user);
     }
 
     @RequestMapping("find")
