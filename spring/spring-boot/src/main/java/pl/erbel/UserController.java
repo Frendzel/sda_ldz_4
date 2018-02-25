@@ -25,6 +25,9 @@ public class UserController {
         return userService.createUser(user);
     }
 
+    /**
+     * Find user based on login
+     */
     @RequestMapping("find")
     public User findUser(@RequestParam String login) {
         try {
