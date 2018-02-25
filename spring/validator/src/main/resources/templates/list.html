@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users list</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">User manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Add user</a></li>
+            <li class="active"><a href="/findAll">Get Users</a></li>
+            <!--<li><a href="#">Success</a></li>-->
+        </ul>
+    </div>
+</nav>
+
+<h1 class="text-center">User list</h1>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>login</td>
+                <td>password</td>
+                <td>firstName</td>
+                <td>lastName</td>
+                <td>birthDate</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.login}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.birthDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+</body>
+</html>

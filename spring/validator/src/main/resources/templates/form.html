@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">User manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Add user</a></li>
+            <li><a href="/findAll">Get Users</a></li>
+            <!--<li><a href="#">Success</a></li>-->
+        </ul>
+    </div>
+</nav>
+<h1 class="text-center">Add user</h1>
+<div class="container">
+    <form method="post" action="/" th:action="@{/}" th:object="${user}">
+        <table>
+            <thead>
+            <tr>
+                <td>id</td>
+                <td>login</td>
+                <td>password</td>
+                <td>firstName</td>
+                <td>lastName</td>
+                <td>birthDate</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="number" th:field="*{id}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="*{login}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="*{password}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="*{firstName}"/>
+                </td>
+                <td>
+                    <input type="text" th:field="*{lastName}"/>
+                </td>
+                <!--<td>-->
+                    <!--<input type="date" th:field="*{birthDate}"/>-->
+                <!--</td>-->
+            </tr>
+            <tr>
+                <td>
+                    <p th:if="${#fields.hasErrors('id')}"
+                       th:errors="*{id}">Incorrect data</p>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('login')}"
+                       th:errors="*{login}">Incorrect data</p>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}">Incorrect data</p>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('firstName')}"
+                       th:errors="*{firstName}">Incorrect data</p>
+                </td>
+                <td>
+                    <p th:if="${#fields.hasErrors('lastName')}"
+                       th:errors="*{lastName}">Incorrect data</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit">SUBMIT</button>
+    </form>
+</div>
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

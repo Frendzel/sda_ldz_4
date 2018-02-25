@@ -3,16 +3,23 @@ package pl.erbel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.validation.Valid;
-import java.util.List;
+
+
+/**
+ * 1. Dodanie walidacji
+ * 2. Obsługa błędów
+ * 3. Wyświetlanie błędów w formularzu
+ * 4. Przełączenie na JPA i bazę danych
+ */
 
 @Controller
-public class UserController {
+public class UserController extends WebMvcConfigurerAdapter {
 
     private static final Logger LOGGER =
             Logger.getLogger(UserController.class);
@@ -20,10 +27,26 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = "add", method = RequestMethod.POST)
-    public User addUser(@Valid @RequestBody User user) throws InterruptedException {
-        return userService.createUser(user);
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+    public String addUser(@Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.
+                    getAllErrors().
+                    forEach(LOGGER::warn);
+            return "form";
+        }
+        LOGGER.info(user);
+        userService.createUser(user);
+        LOGGER.info("saved");
+        return "success";
     }
+
+    //    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @GetMapping("/")
+    public String addUserForm(User user) {
+        return "form";
+    }
+
 
     @RequestMapping("find")
     public User findUser(@RequestParam String login) {
@@ -56,8 +79,9 @@ public class UserController {
     }
 
     @RequestMapping("findAll")
-    public List<User> findAll() {
-        return userService.findAll();
+    public String findAll(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "list";
     }
 
 }

@@ -1,5 +1,7 @@
 package pl.erbel;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.annotation.PostConstruct;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +32,7 @@ public class User {
     private String lastName;
 
     @Past
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     public User() {

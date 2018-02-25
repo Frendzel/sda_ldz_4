@@ -3,6 +3,7 @@ package pl.erbel;
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class User {
@@ -10,9 +11,11 @@ public class User {
     private Long id;
 
     @NotNull
+    @Size(min = 6)
     private String login;
 
     @NotNull
+    @Size(min = 8)
     private String password;
 
     @NotNull
@@ -21,7 +24,7 @@ public class User {
     @NotNull
     private String lastName;
 
-    @Past
+//    @Past
     private Date birthDate;
 
     public User() {
@@ -33,6 +36,14 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
