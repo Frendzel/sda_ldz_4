@@ -52,7 +52,7 @@ public class App implements CommandLineRunner {
                 getForObject("http://api.icndb.com/jokes/random",
                         Joke.class);
 
-        System.out.println(joke);
+//        System.out.println(joke);
         return joke;
     }
 }
