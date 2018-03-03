@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.validation.Valid;
@@ -41,7 +44,32 @@ public class UserController extends WebMvcConfigurerAdapter {
         return "success";
     }
 
-    //    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @GetMapping(path = "update") //@RequestMapping(method = RequestMethod.PUT)
+    public String updateUser(User user) {
+        return "update";
+    }
+
+    @RequestMapping(path = "update", method = RequestMethod.PUT)
+//    @PutMapping(path = "update")
+    public String update(@Valid User user,
+                         BindingResult bindingResult,
+                         Model model) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.
+                    getAllErrors().
+                    forEach(LOGGER::warn);
+            return "update";
+        }
+        try {
+            userService.updateUser(user);
+            model.addAttribute("login", user.getLogin());
+            return "success";
+        } catch (UserNotFoundException e) {
+            LOGGER.error("USER NOT FOUND: " + user.getLogin());
+            return "userNotFound";
+        }
+    }
+
     @GetMapping("/")
     public String addUserForm(User user) {
         return "form";
@@ -58,24 +86,22 @@ public class UserController extends WebMvcConfigurerAdapter {
         return new User();
     }
 
-    @RequestMapping(path = "update", method = RequestMethod.PUT)
-    public User update(@RequestBody User user) {
-        try {
-            return userService.updateUser(user);
-        } catch (UserNotFoundException e) {
-            LOGGER.error("USER NOT FOUND: " + user.getLogin());
-        }
-        return new User();
-    }
 
     @RequestMapping(path = "delete", method = RequestMethod.DELETE)
-    public Boolean deleteUser(@RequestParam String login) {
+    public String deleteUser(@RequestParam String login, Model model) {
         try {
-            return userService.deleteUser(login);
+            model.addAttribute("login", login);
+            userService.deleteUser(login);
+            return "success";
         } catch (UserNotFoundException e) {
             LOGGER.info("USER NOT FOUND: " + login);
+            return "userNotFound";
         }
-        return false;
+    }
+
+    @RequestMapping(path = "delete", method = RequestMethod.GET)
+    public String deleteUser(User user) {
+        return "deleteUser";
     }
 
     @RequestMapping("findAll")

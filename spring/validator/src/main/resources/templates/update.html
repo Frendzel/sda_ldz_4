@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<itle>
     <title>Title</title>
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
@@ -12,16 +12,16 @@
             <a class="navbar-brand" href="#">User manager</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Add user</a></li>
+            <li><a href="#">Add user</a></li>
             <li><a href="/findAll">Get Users</a></li>
             <li><a href="/delete">Delete User</a></li>
-            <li><a href="/update">Update User</a></li>
+            <li class="active"><a href="/update">Update User</a></li>
         </ul>
     </div>
 </nav>
-<h1 class="text-center">Add user</h1>
+<h1 class="text-center">Update user</h1>
 <div class="container">
-    <form method="post" th:action="@{/}" th:object="${user}">
+    <form th:method="put" th:action="@{update}" th:object="${user}">
         <table>
             <thead>
             <tr>
@@ -78,7 +78,7 @@
             </tr>
             </tbody>
         </table>
-        <button type="submit">SUBMIT</button>
+        <button type="submit">UPDATE</button>
     </form>
 </div>
 <script type="text/javascript"

@@ -14,14 +14,15 @@ public class UserGenerator {
     public static List<User> generateUsers() {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < USERS_NUMBER; i++) {
-            User randomUser = createRandomUser();
+            User randomUser = createRandomUser(i);
             users.add(randomUser);
         }
         return users;
     }
 
-    private static User createRandomUser() {
+    private static User createRandomUser(int i) {
         User user = new User();
+        user.setId((long) i);
         user.setFirstName(randomAlphabetic(NAME_LENGTH));
         user.setLastName(randomAlphabetic(NAME_LENGTH));
         user.setPassword(randomAlphabetic(NAME_LENGTH));

@@ -2,8 +2,10 @@ package pl.erbel;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
@@ -12,34 +14,41 @@ public class UserService implements IUserRepository {
     private static final Logger LOGGER =
             Logger.getLogger(UserService.class);
 
+    IUserRepository unknownRepository;
+
     @Autowired
-    UserRepository userRepository;
+    DBFactory dbFactory;
+
+    @PostConstruct
+    private void init(){
+        this.unknownRepository = dbFactory.getRepository();
+    }
 
     @Override
     public User createUser(User user) {
-        User result = userRepository.createUser(user);
+        User result = unknownRepository.createUser(user);
         LOGGER.info(result);
         return result;
     }
 
     @Override
     public User findUser(String login) throws UserNotFoundException {
-        return userRepository.findUser(login);
+        return unknownRepository.findUser(login);
     }
 
     @Override
     public User updateUser(User user) throws UserNotFoundException {
-        return userRepository.updateUser(user);
+        return unknownRepository.updateUser(user);
     }
 
     @Override
     public boolean deleteUser(String login) throws UserNotFoundException {
-        return userRepository.deleteUser(login);
+        return unknownRepository.deleteUser(login);
     }
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return unknownRepository.findAll();
     }
 
     private void simulateDBLag() {
