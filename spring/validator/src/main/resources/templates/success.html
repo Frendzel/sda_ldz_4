@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User saved!</title>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">User manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Add user</a></li>
+            <li><a href="/findAll">Get Users</a></li>
+            <li><a href="/delete">Delete User</a></li>
+        </ul>
+    </div>
+</nav>
+<h2>Completed action on user:
+    <span th:text="${login}"></span>
+</h2>
+</body>
+</html>

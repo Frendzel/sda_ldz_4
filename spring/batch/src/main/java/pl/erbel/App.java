@@ -6,16 +6,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import static org.apache.log4j.Logger.getLogger;
 
+//TODO clean up
 @SpringBootApplication
 public class App implements CommandLineRunner {
 
-    private static final Logger LOGGER = getLogger(CommandLineRunner.class);
+    private static final Logger LOGGER =
+            Logger.getLogger(CommandLineRunner.class);
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private BatchConfiguration batchConfiguration;
 
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
@@ -23,5 +28,6 @@ public class App implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        LOGGER.info(batchConfiguration.getSaveJednorozecCronConfiguration());
     }
 }

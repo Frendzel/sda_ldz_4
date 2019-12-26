@@ -14,17 +14,11 @@ public class App implements CommandLineRunner {
     ApplicationContext context;
 
     public static void main(String[] args) {
-//        SpringApplication springApplication =
-//                new SpringApplication(App.class);
-//        Properties properties = new Properties();
-//        properties.put("SERVER_PORT", 9999);
-//        springApplication.setDefaultProperties(properties);
-//        springApplication.run(args);
         SpringApplication.run(App.class);
     }
 
     @Override
     public void run(String... strings) throws Exception {
-        System.out.println(context.getApplicationName());
+        System.out.println("Hello World");
     }
 }

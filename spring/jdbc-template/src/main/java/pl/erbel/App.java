@@ -4,12 +4,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class App implements CommandLineRunner {
 
     @Autowired
@@ -27,6 +31,9 @@ public class App implements CommandLineRunner {
 
     @Autowired
     UserService userService;
+
+    @Value("${csv.file.path}")
+    String csvFilePath;
 
     public static void main(String[] args) {
         SpringApplication.run(App.class);
@@ -51,25 +58,25 @@ public class App implements CommandLineRunner {
         //let's test transactions here:
 //        userService.transform();
 
-        try{
+        try {
             userService.wrongInsert();
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         userService.selectUser(1000);
         userService.selectUser(1001);
 
-        try{
+        try {
             userService.selectUser(5);
             userService.toMale(5);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             userService.selectUser(5);
         }
     }
 
     public void csvRecords() throws IOException {
-        FileReader reader = new FileReader("/Users/marcinerbel/Documents/sda4/sda_ldz_4/spring/jdbc-template/src/main/resources/inserts.csv");
+        FileReader reader = new FileReader(csvFilePath);
         CSVParser parse = CSVFormat.
                 DEFAULT.
                 withHeader("id", "first_name", "last_name", "email", "gender").
